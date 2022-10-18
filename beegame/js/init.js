@@ -1,6 +1,8 @@
 "use strict";
 let loop;
 let saveLoop;
+let iconMoveLoop;
+let leftIcon = true;
 let lgmax = "20 (lower god cap)";
 let lgmaxnumber = 20;
 let flowerFieldCost;
@@ -40,6 +42,28 @@ const init = () => {
     }
     // d.honeyCheckBox.checked = !!p.sellingHoney;
     p.sellingHoney = false; // todo: make it a setting later
-    saveLoop = setInterval(save, 10000);
+    if (p.autosaves)
+        saveLoop = setInterval(save, 10000);
+    d.autosaves.checked = p.autosaves;
+    if (p.iconMove)
+        iconMoveLoop = setInterval(moveIcon, 1000);
+    d.iconMove.checked = p.iconMove;
+};
+const moveIcon = () => {
+    leftIcon = !leftIcon;
+    d["favicon"].setAttribute("href", leftIcon ? "faviconleft.ico" : "faviconright.ico");
 };
 init();
+const toggleIconMove = () => {
+    p.iconMove = !p.iconMove;
+    d.iconMove.checked = !!p.iconMove;
+    if (p.iconMove) {
+        clearInterval(iconMoveLoop);
+        iconMoveLoop = setInterval(moveIcon, 1000);
+    }
+    else {
+        clearInterval(iconMoveLoop);
+    }
+    console.log(`move icon ${p.autosaves ? "on" : "off"}`);
+};
+d.iconMove.addEventListener("click", toggleIconMove);

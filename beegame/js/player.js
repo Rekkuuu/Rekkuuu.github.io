@@ -70,6 +70,7 @@ const newEmptyPlayer = () => {
         displayEverything: false,
         harderTributes: false,
         exchangeConfirmation: true,
+        iconMove: false,
     };
 };
 let p;

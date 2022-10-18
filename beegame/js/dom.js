@@ -278,5 +278,7 @@ const d = {
     RJWrapper2: $("RJWrapper2"),
     RJWrapper3: $("RJWrapper3"),
     RJWrapper4: $("RJWrapper4"),
+    favicon: $("favicon"),
+    iconMove: $("iconMove"),
 };
 //todo shorten these names?

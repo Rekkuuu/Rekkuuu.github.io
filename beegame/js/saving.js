@@ -12,6 +12,7 @@ const toggleAutosave = () => {
     p.autosaves = !p.autosaves;
     d.autosaves.checked = !!p.autosaves;
     if (p.autosaves) {
+        clearInterval(saveLoop);
         saveLoop = setInterval(save, 10000);
     }
     else {
@@ -30,6 +31,8 @@ let fix = (save) => {
         save["harderTributes"] = false;
     if (save["exchangeConfirmation"] == undefined)
         save["exchangeConfirmation"] = true;
+    if (save["iconMove"] == undefined)
+        save["iconMove"] = false;
     if (save["RJ"] == undefined)
         save["RJ"] = 0;
     if (save["highestRJ"] == undefined)
