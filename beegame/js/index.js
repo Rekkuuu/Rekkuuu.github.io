@@ -641,7 +641,7 @@ const updateText = () => {
         d.neededBeesToSacrifice.innerHTML = `you can sacrifice`;
     let hasBees = beesReqToSacrifice > 0;
     // disable/enable sacrifice buttons + tributes for sacrifice text
-    if (pollenGodTributesToGet < 1 || hasBees || p.pollenGodTributes == lgmaxnumber) {
+    if (pollenGodTributesToGet < 1 || hasBees || p.pollenGodTributes >= lgmaxnumber) {
         d.donateToPollenGod.disabled = true;
         d.pollenGodTributesToGet.innerHTML = `0 tributes`;
     }
@@ -659,7 +659,7 @@ const updateText = () => {
         let actualnectarGodTributesToGet = Math.max(0, Math.min(lgmaxnumber - p.nectarGodTributes, Math.max(0, nectarGodTributesToGet)));
         /*prettier-ignore*/ d.nectarGodTributesToGet.innerHTML = `${actualnectarGodTributesToGet} tribute${Math.max(0, actualnectarGodTributesToGet) == 1 ? '' : "s"}`;
     }
-    if (honeyGodTributesToGet < 1 || hasBees || p.honeyGodTributes == lgmaxnumber) {
+    if (honeyGodTributesToGet < 1 || hasBees || p.honeyGodTributes >= lgmaxnumber) {
         d.donateToHoneyGod.disabled = true;
         d.honeyGodTributesToGet.innerHTML = `0 tributes`;
     }
@@ -668,7 +668,7 @@ const updateText = () => {
         let actualhoneyGodTributesToGet = Math.max(0, Math.min(lgmaxnumber - p.honeyGodTributes, Math.max(0, honeyGodTributesToGet)));
         /*prettier-ignore*/ d.honeyGodTributesToGet.innerHTML = `${actualhoneyGodTributesToGet} tribute${Math.max(0, actualhoneyGodTributesToGet) == 1 ? '' : "s"}`;
     }
-    if (flowerGodTributesToGet < 1 || hasBees || p.flowerGodTributes == lgmaxnumber) {
+    if (flowerGodTributesToGet < 1 || hasBees || p.flowerGodTributes >= lgmaxnumber) {
         d.donateToFlowerGod.disabled = true;
         d.flowerGodTributesToGet.innerHTML = `0 tributes`;
     }
@@ -677,7 +677,7 @@ const updateText = () => {
         let actualflowerGodTributesToGet = Math.max(0, Math.min(lgmaxnumber - p.flowerGodTributes, Math.max(0, flowerGodTributesToGet)));
         /*prettier-ignore*/ d.flowerGodTributesToGet.innerHTML = `${actualflowerGodTributesToGet} tribute${Math.max(0, actualflowerGodTributesToGet) == 1 ? '' : "s"}`;
     }
-    if (capitalistGodTributesToGet < 1 || hasBees || p.capitalistGodTributes == lgmaxnumber) {
+    if (capitalistGodTributesToGet < 1 || hasBees || p.capitalistGodTributes >= lgmaxnumber) {
         d.donateToCapitalistGod.disabled = true;
         d.capitalistGodTributesToGet.innerHTML = `0 tributes`;
     }
