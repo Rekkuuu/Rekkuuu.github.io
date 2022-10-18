@@ -954,7 +954,7 @@ const updateText = () => {
     d.pernamentTributeEffects.innerHTML = `${p.pge ? "✓" : "✗"} pollen: 2x pollen production<br>
 ${p.nge ? "✓" : "✗"} nectar: 2x honey production<br>
 ${p.hge ? "✓" : "✗"} honey: bees amount isn't rounded down & you can choose<br>
- bee type to auto assing bought bees to (try clicking a bee type)<br>
+ bee type to auto assign bought bees to (try clicking a bee type)<br>
 ${p.fge ? "✓" : "✗"} flowers: lets you sell honey (requires at least 0.1 honey)<br>
 ${p.cge ? "✓" : "✗"} capitalist: worker spaces aren't rounded down`;
     // let t = tributeMilestones.filter((a) => a > tmp.totalTributes).length;
