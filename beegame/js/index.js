@@ -700,8 +700,8 @@ const updateText = () => {
     if (pol == lgmaxnumber) {
         d.pollenGodTributesAfterSacrifice.innerHTML = lgmax;
     }
-    if (pol >= lgmaxnumber) {
-        d.pollenGodTributesAfterSacrifice.innerHTML = `${p.pollenGodTributes} -> ${lgmax};`;
+    else if (pol >= lgmaxnumber) {
+        d.pollenGodTributesAfterSacrifice.innerHTML = `${p.pollenGodTributes} -> ${lgmax}`;
         d.nextPollenGodTribute.innerHTML = "???";
     }
     else {
@@ -712,8 +712,8 @@ const updateText = () => {
     if (nec == lgmaxnumber) {
         d.nectarGodTributesAfterSacrifice.innerHTML = lgmax;
     }
-    if (nec >= lgmaxnumber) {
-        d.nectarGodTributesAfterSacrifice.innerHTML = `${p.nectarGodTributes} -> ${lgmax};`;
+    else if (nec >= lgmaxnumber) {
+        d.nectarGodTributesAfterSacrifice.innerHTML = `${p.nectarGodTributes} -> ${lgmax}`;
         d.nextNectarGodTribute.innerHTML = "???";
     }
     else {
@@ -724,8 +724,8 @@ const updateText = () => {
     if (hon == lgmaxnumber) {
         d.honeyGodTributesAfterSacrifice.innerHTML = lgmax;
     }
-    if (hon >= lgmaxnumber) {
-        d.honeyGodTributesAfterSacrifice.innerHTML = `${p.honeyGodTributes} -> ${lgmax};`;
+    else if (hon >= lgmaxnumber) {
+        d.honeyGodTributesAfterSacrifice.innerHTML = `${p.honeyGodTributes} -> ${lgmax}`;
         d.nextHoneyGodTribute.innerHTML = "???";
     }
     else {
@@ -736,8 +736,8 @@ const updateText = () => {
     if (flo == lgmaxnumber) {
         d.flowerGodTributesAfterSacrifice.innerHTML = lgmax;
     }
-    if (flo >= lgmaxnumber) {
-        d.flowerGodTributesAfterSacrifice.innerHTML = `${p.flowerGodTributes} -> ${lgmax};`;
+    else if (flo >= lgmaxnumber) {
+        d.flowerGodTributesAfterSacrifice.innerHTML = `${p.flowerGodTributes} -> ${lgmax}`;
         d.nextFlowerGodTribute.innerHTML = "???";
     }
     else {
@@ -748,7 +748,7 @@ const updateText = () => {
     if (cap == lgmaxnumber) {
         d.capitalistGodTributesAfterSacrifice.innerHTML = lgmax;
     }
-    if (cap >= lgmaxnumber) {
+    else if (cap >= lgmaxnumber) {
         d.capitalistGodTributesAfterSacrifice.innerHTML = `${p.honeyGodTributes} -> ${lgmax}`;
         d.nextCapitalistGodTribute.innerHTML = "???";
     }
