@@ -1375,12 +1375,14 @@ var n_stats;
         RJFromtotalhoney: 0,
         RJFromtotalmoney: 0,
     };
-    n_stats.text = () => {
+    n_stats.calc = () => {
         n_stats.tmp.RJFromtotalflowers = Math.log10(Math.max(1, p.totalflowers));
         n_stats.tmp.RJFromtotalpollen = Math.log10(Math.max(1, p.totalpollen));
         n_stats.tmp.RJFromtotalnectar = Math.log10(Math.max(1, p.totalnectar));
         n_stats.tmp.RJFromtotalhoney = Math.log10(Math.max(1, p.totalhoney));
         n_stats.tmp.RJFromtotalmoney = Math.log10(Math.max(1, p.totalmoney));
+    };
+    n_stats.text = () => {
         d.RJfromflowers.innerHTML = format(n_stats.tmp.RJFromtotalflowers, 1) + " RJ";
         d.RJfrompollen.innerHTML = format(n_stats.tmp.RJFromtotalpollen, 1) + " RJ";
         d.RJfromnectar.innerHTML = format(n_stats.tmp.RJFromtotalnectar, 1) + " RJ";
@@ -1455,6 +1457,7 @@ const GameLoop = () => {
     n_sacrifices.calc();
     n_structures.calc();
     n_resources.calc(diff);
+    n_stats.calc();
     n_structures.autobuy();
     if (p.tab == "jelly")
         n_jelly.text();

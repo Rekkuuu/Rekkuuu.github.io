@@ -32,7 +32,7 @@ let fix = (save) => {
         save["version"] = [0, 0, 0, 0];
     if (typeof save["version"] == "number")
         save["version"] = [0, 0, 0, 0];
-    let v = [0, 2, 5, 3];
+    let v = [0, 2, 5, 4];
     if (save["version"] < v) {
         // rj
         if (save["RJ"] == undefined)
