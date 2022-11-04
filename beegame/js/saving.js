@@ -32,7 +32,7 @@ let fix = (save) => {
         save["version"] = [0, 0, 0, 0];
     if (typeof save["version"] == "number")
         save["version"] = [0, 0, 0, 0];
-    let v = [0, 2, 5, 4];
+    let v = [0, 2, 5, 3];
     if (save["version"] < v) {
         // rj
         if (save["RJ"] == undefined)
@@ -135,6 +135,20 @@ let fix = (save) => {
             save.autobuy = newEmptyPlayer().autobuy;
         if (save["autobuy"]["structures"] == undefined)
             save["autobuy"]["structures"] = newEmptyPlayer().autobuy.structures;
+        save["version"] = v;
+    }
+    v = [0, 3, 0, 0];
+    if (save["version"] < v) {
+        if (save["combinedGods"] == undefined)
+            save["combinedGods"] = [];
+        if (save["unlocks"]["c1"] == undefined)
+            save["unlocks"]["c1"] = false;
+        if (save["unlocks"]["c2"] == undefined)
+            save["unlocks"]["c2"] = false;
+        if (save["unlocks"]["c3"] == undefined)
+            save["unlocks"]["c3"] = false;
+        if (save["unlocks"]["c4"] == undefined)
+            save["unlocks"]["c4"] = false;
         save["version"] = v;
     }
     return save;
