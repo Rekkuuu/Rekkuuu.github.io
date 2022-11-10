@@ -141,11 +141,11 @@ let percentOfHoneySold = {
     100: 1 - Math.pow(0.99, 100),
 };
 const getHoneyToSell = (honeyToSell) => {
-    var _a;
-    if (honeyToSell === void 0) { honeyToSell = p.honey * ((_a = percentOfHoneySold[tmp.usedTime]) !== null && _a !== void 0 ? _a : 0.01); }
-    if (p.honey < 1 / (getHoneyWorth() * 10))
-        return 0;
-    return honeyToSell;
+    if (totalBees() == 0)
+    honeyToSell = p.honey - beeCost.costFunction();
+if (honeyToSell < 0.1)
+    return 0;
+return honeyToSell * (1 - percentTimeSpeed[TMP.usedTime] || 0.01);
 };
 const getHoneyWorth = () => {
     let worth = n_tributes.tmp.me[7];
@@ -1504,6 +1504,7 @@ var n_gods;
     };
 })(n_gods || (n_gods = {}));
 const GameLoop = () => {
+    if(totalBees()==0 && p.honey < getBeePrice()) p.honey=getBeePrice()
     var _a;
     let now = Date.now();
     let diff = ((now - p.lastUpdate) / 1000) * gameSpeed;
