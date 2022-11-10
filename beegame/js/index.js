@@ -140,12 +140,16 @@ let percentOfHoneySold = {
     50: 1 - Math.pow(0.99, 50),
     100: 1 - Math.pow(0.99, 100),
 };
+let percentTimeSpeed = {};
+for (let i = 1; i <= 100; i++) {
+    percentTimeSpeed[`${i}`] = Math.pow(0.99, i);
+}
 const getHoneyToSell = (honeyToSell) => {
     if (totalBees() == 0)
     honeyToSell = p.honey - beeCost.costFunction();
 if (honeyToSell < 0.1)
     return 0;
-return honeyToSell * (1 - percentTimeSpeed[TMP.usedTime] || 0.01);
+return honeyToSell * (1 - percentTimeSpeed[tmp.usedTime] || 0.01);
 };
 const getHoneyWorth = () => {
     let worth = n_tributes.tmp.me[7];
