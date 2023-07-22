@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script defer src="break_eternity.js"></script>
+    <script defer src="main.min.js"></script>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div id="preshit">
+      <div>something went wrong</div>
+      <div>try enabling third party cookies on itch or try the <a href="https://rekkuuu.github.io/game/">github link</a></div>
+    </div>
+    <div id="game" style="display: none">
+      <div id="top">
+        <fieldset id="f-tabs">
+          <legend>tabs</legend>
+          <div id="tabs">
+            <button id="main">main</button>
+            <button style="visibility: hidden" id="mass">mass</button>
+            <button id="help">help</button>
+            <button style="visibility: hidden" id="challenges">challenges</button>
+            <button style="visibility: hidden" id="stars">stars</button>
+            <button id="settings">settings</button>
+          </div>
+        </fieldset>
+        <fieldset id="f-res">
+          <legend>resources</legend>
+          <div id="resources">
+            <div>ener: <span id="energy-amount">0.00</span></div>
+            <div>mass: <span id="mass-amount">0.00</span></div>
+          </div>
+        </fieldset>
+      </div>
+      <div style="clear: both"></div>
+      <fieldset id="main-tab">
+        <legend>main</legend>
+        <div id="generators-container">
+          <fieldset id="f-generator">
+            <legend id="generator-name">generator</legend>
+            <div id="generator-desc">makes 1 energy/s</div>
+          </fieldset>
+          <fieldset id="f-accelerator">
+            <legend id="accelerator-name">accelerator</legend>
+            <div id="accelerator-desc">time speed 1.03x</div>
+          </fieldset>
+        </div>
+        <fieldset id="f-upgrades">
+          <legend>upgrades</legend>
+          <div id="upgrades-container"></div>
+        </fieldset>
+      </fieldset>
+      <fieldset id="mass-tab">
+        <legend>mass</legend>
+        <div id="mass-top">
+          <fieldset id="f-prestige">
+            <legend>prestige</legend>
+            <button id="prestige-button">prestige for <span id="massToGet"></span> mass</button><br />
+            <input type="checkbox" id="prestige-confirm" /> confirm
+          </fieldset>
+          <fieldset id="f-massEffects">
+            <legend>you will lose</legend>
+            <div>● your energy</div>
+            <div>● generator level</div>
+            <div>● bought upgrades</div>
+          </fieldset>
+          <fieldset id="f-massGain">
+            <legend>mass gain</legend>
+            <div id="baseMass-gain">base: -0.53</div>
+            <div id="baseEner-gain">ener: +1.31<span class="pl2">0.78</span></div>
+            <div id="baseLvls-gain">lvls: +2.13<span class="pl2">2.91</span></div>
+          </fieldset>
+        </div>
+
+        <fieldset id="f-upgradesMass">
+          <legend>upgrades</legend>
+          <div id="upgradesMass-container"></div>
+        </fieldset>
+        <div id="mass-bottom">
+          <fieldset id="f-bought-upgrades">
+            <legend>bought</legend>
+            <div id="bought-upgrades-status"></div>
+          </fieldset>
+          <fieldset id="f-buy-accelerator">
+            <legend>accelerator</legend>
+            <button id="buy-accelerator-button">unlock accelerator<br />cost: 3.00 mass</button>
+          </fieldset>
+          <fieldset id="f-buy-eu">
+            <legend>energy upgrades</legend>
+            <button id="buy-eu-button">unlock autobuyer<br />cost: 6.00 mass</button>
+          </fieldset>
+          <fieldset id="f-auto-eu">
+            <legend>energy upgrades</legend>
+            <div><input type="checkbox" id="auto-eu-checkbox" /> auto: <span id="auto-eu-status">off</span></div>
+            <div>uses 50% of energy</div>
+          </fieldset>
+          <fieldset id="f-challenges-buy">
+            <legend>challenges (TBA)</legend>
+            <button id="challneges-buy-button" class="disabled" disabled="true">unlock challenges<br />cost: 10.0 mass</button>
+          </fieldset>
+        </div>
+      </fieldset>
+      <fieldset id="challenges-tab">
+        <legend>challenges</legend>
+        <div id="challenges-container">
+          <fieldset id="challenge-0">
+            <legend>challenge I 0/10</legend>
+            <div id="challenge-0-desc">gain less energy based on current energy</div>
+            <div>
+              <button id="challenge-0-button">enter</button>
+              <div id="challenge-0-req">req: 1e10 energy</div>
+            </div>
+          </fieldset>
+          <fieldset id="challenge-1">
+            <legend>challenge II 0/10</legend>
+            <div id="challenge-1-desc">energy and mass upgrades do nothing</div>
+            <div>
+              <button id="challenge-1-button">enter</button>
+              <div id="challenge-1-req">req: 1e10 energy</div>
+            </div>
+          </fieldset>
+          <fieldset id="challenge-2">
+            <legend>challenge III 0/10</legend>
+            <div id="challenge-2-desc">
+              every production is severely
+              <span id="reduced">reduced</span>
+            </div>
+            <div>
+              <button id="challenge-2-button">enter</button>
+              <div id="challenge-2-req">req: 1e10 energy</div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div>
+          <div>challenges difficulty = required energy, f() of ch level</div>
+          <div>trophies make them easier, make last trophy effect = 1.05 @100, 1.1@1000</div>
+        </div>
+        <div id="trophy-both">
+          <fieldset id="f-trophies">
+            <legend>trophies</legend>
+            <div id="trophies">
+              <div class="trophy" id="trophy-0">
+                <button><span>🏆</span><span>I</span></button>
+              </div>
+              <div class="trophy" id="trophy-1">
+                <button><span>🏆</span><span>II</span></button>
+              </div>
+              <div class="trophy" id="trophy-2">
+                <button><span>🏆</span><span>III</span></button>
+              </div>
+              <div class="trophy" id="trophy-3">
+                <button><span>🏆</span><span>IV</span></button>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset id="f-trophy">
+            <legend>selected: trophy I</legend>
+            <div>lv 0 / 100</div>
+            <div>xp 0 / 10</div>
+            <div>makes 1.3xp/s</div>
+            <div>have it so you can select none? TODO</div>
+          </fieldset>
+          <fieldset id="f-trophyeffects">
+            <legend>selected trophy effects</legend>
+            <div id="trophyAsterisk">*</div>
+            <div>1.77x gen/acc gain & speed</div>
+            <div>7.77x energy gain</div>
+            <div>0.77x mass gain</div>
+            <div>1.00x challenges scaling</div>
+          </fieldset>
+        </div>
+      </fieldset>
+      <fieldset id="stars-tab">
+        <legend>stars</legend>
+        <fieldset id="f-stars">
+          <legend>selected 0/3</legend>
+          <div id="stars-container">
+            <div class="ye">11</div>
+            <div class="ye">12</div>
+            <div class="gr">13</div>
+            <div class="gr">14</div>
+            <div class="gr">15</div>
+            <div class="ye">21</div>
+            <div class="ye">22</div>
+            <div class="ye">23</div>
+            <div class="gr">24</div>
+            <div class="bu">25</div>
+            <div class="pi">31</div>
+            <div class="repi">32</div>
+            <div class="wh">33</div>
+            <div class="gr">34</div>
+            <div class="bu">35</div>
+            <div class="pi">41</div>
+            <div class="re">42</div>
+            <div class="bupu">43</div>
+            <div class="bu">44</div>
+            <div class="bu">45</div>
+            <div class="pi">51</div>
+            <div class="re">52</div>
+            <div class="pu">53</div>
+            <div class="pu">54</div>
+            <div class="pu">55</div>
+          </div>
+          use a node graph for this
+        </fieldset>
+      </fieldset>
+      <fieldset id="help-tab">
+        <legend>help</legend>
+        <details class="d-main">
+          <summary>xp gain</summary>
+          <div>
+            <details class="d-xp">
+              <summary>generator</summary>
+              <div>gains xp based on its base energy production</div>
+            </details>
+            <details class="d-xp">
+              <summary>upgrades</summary>
+              <div>gain xp when buying them<br />xp is based on how much are already bought<br />xp gained equals their (level+1)/2</div>
+            </details>
+            <details class="d-xp">
+              <summary>accelerator</summary>
+              <div>gains xp based on it's effect</div>
+            </details>
+          </div>
+        </details>
+        <details class="d-main">
+          <summary>levels</summary>
+          <div>
+            <details class="d-levels">
+              <summary>leveling up</summary>
+              <div>
+                <details class="d-levels-req">
+                  <summary>lv &le; 10000</summary>
+                  <div>
+                    xp req. to level up increases by their<br />
+                    (level+1)*10 <span class="pl">e.g. 10 -> 30 -> 60 -> 100</span>
+                  </div>
+                </details>
+                <details class="d-levels-req">
+                  <summary>lv &gt; 10000</summary>
+                  <div>
+                    xp required to level up starts increasing<br />
+                    by 10x every 1000 levels ~1.0023x per level
+                  </div>
+                </details>
+              </div>
+            </details>
+            <details class="d-levels">
+              <summary>upgrades</summary>
+              <div>
+                get stronger after you level up<br />
+                level up makes upgrade +10% stronger<br />
+                e.g. having lv 10 upgrade, and buying it<br />
+                counts as buying 2 upgrades at lv 0
+              </div>
+            </details>
+          </div>
+        </details>
+        <div style="margin-top: 7px">might contain spoilers</div>
+        <div style="margin-top: 7px">game made for <a href="https://itch.io/jam/summer-incremental-game-jam-2023/">SIGJ 2023</a></div>
+      </fieldset>
+
+      <fieldset id="settings-tab">
+        <legend>settings</legend>
+        <fieldset id="f-saving">
+          <legend>saving</legend>
+          <button id="save">save</button><button id="load">load</button><button id="export">export</button
+          ><button id="import">import</button><button id="reset">reset</button><br />
+          <input type="checkbox" id="autosave" /> autosave
+        </fieldset>
+        <fieldset id="f-bgs">
+          <legend>backgrounds</legend>
+          <span id="themes"></span> <br />
+          <input type="checkbox" id="gradient" /> gradients
+        </fieldset>
+        <!-- <fieldset id="f-gameplay">
+          <legend>gameplay</legend>
+          <input type="checkbox" id="offline-progress" /> offline progress
+        </fieldset> -->
+      </fieldset>
+
+      <!-- so i can do it this way but there is no fucking way i, it would be cooler but ill just rename it -->
+      <!-- <br /><br />
+      <style>
+        .fakefieldset {
+          border: 1px solid white;
+          border-top: none;
+          position: relative;
+        }
+        .fakefieldset .x {
+          position: absolute;
+          top: -7px;
+          left: 0.5rem;
+        }
+        .fl1,
+        .fl2,
+        .fl3 {
+          border-top: 1px solid white;
+          display: inline-block;
+          position: absolute;
+        }
+        .fl1 {
+          width: calc(0.5rem - 1px);
+        }
+        .fl2 {
+          display: inline-block;
+          position: absolute;
+          left: calc(5.5rem + 1px);
+          width: 0.5rem;
+          border-top: 1px solid white;
+        }
+        .fl25 {
+          display: inline-block;
+          position: absolute;
+          left: calc(6rem + 2px);
+          top: -7px;
+        }
+        .fl3 {
+          display: inline-block;
+          position: absolute;
+          left: calc(10rem - 3px);
+          border-top: 1px solid white;
+          width: calc(100% - 11rem - 2px);
+        }
+      </style>
+
+      <div class="fakefieldset">
+        <span class="x">generator</span>
+        <span class="fl1"></span>
+        <span class="fl25">lv. 13</span>
+        <span class="fl3"> </span>
+        <br /><br />
+      </div> -->
+      <div id="saveTimer"></div>
+      <div style="display: none">
+        <textarea id="saveExport" style="width: 100px; height: 60px"></textarea>
+      </div>
+      <div id="tooltip"><div id="tooltip-text"></div></div>
+    </div>
+  </body>
+</html>
