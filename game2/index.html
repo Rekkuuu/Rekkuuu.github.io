@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>game game</title>
+    <script defer src="helper.js"></script>
+    <script defer src="main.js"></script>
+  </head>
+  <body>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #111;
+      }
+      #points,
+      #info {
+        padding: 10px;
+        width: max-content;
+        font-size: 1.3em;
+        float: left;
+      }
+      #points {
+        background-color: #fff4;
+      }
+      #info {
+        color: #fffa;
+        cursor: pointer;
+      }
+
+      #c {
+        width: 850px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        display: flex;
+        flex-wrap: wrap;
+
+        background-color: #fff4;
+        gap: 10px 0;
+      }
+
+      .btn {
+        display: inline-block;
+        height: 110px;
+        width: 200px;
+        padding: 5px;
+        padding-top: 5px;
+        background-color: #ffd4;
+        -webkit-user-select: none; /* Safari */
+        -ms-user-select: none; /* IE 10 and IE 11 */
+        user-select: none; /* Standard syntax */
+        border: 0;
+        margin-left: 10px;
+      }
+
+      .btn2 {
+        width: calc(270px);
+      }
+      .btn3 {
+        width: 410px;
+      }
+      .btn div:nth-child(1) {
+        text-align: center;
+        font-size: 1.25em;
+        height: 25%;
+      }
+      .btn div:nth-child(2) {
+        height: max-content;
+        min-height: 60%;
+      }
+      .btn.ok {
+        background-color: #afa5;
+      }
+      .btn.ok:hover {
+        background-color: #afa6;
+        cursor: pointer;
+      }
+      .lightgreen {
+        color: #75d585;
+      }
+      .gray {
+        color: #554560;
+        font-size: 0.85em;
+      }
+    </style>
+    <div id="points">points: 1</div>
+    <div id="info" tabindex="0" style="display: none">You can hold enter to buy upgrades (click to hide)</div>
+    <div id="c" style="clear: both">
+      <button id="su" class="btn">
+        <div id="su-a">big upgrade</div>
+        <div id="su-b">+1 point gain<br />1.01x point gain</div>
+        <div id="su-c">cost: 1</div>
+      </button>
+      <button id="bu" class="btn">
+        <div id="bu-a">big upgrade</div>
+        <div id="bu-b">+1 & +0.01x to small upgrade base</div>
+        <div id="bu-c">cost: 100</div>
+      </button>
+      <button id="sp" class="btn">
+        <div id="sp-a">small prestige</div>
+        <div id="sp-b">point gain by 2x</div>
+        <div id="sp-c">cost: 1000</div>
+      </button>
+      <button id="bp" class="btn">
+        <div id="bp-a">big prestige</div>
+        <div id="bp-b">
+          +0.5x to small prestige base <br />
+          +0.01x to small upgrade
+        </div>
+        <div id="bp-c">cost: 1e10</div>
+      </button>
+      <button id="dlc1" class="btn btn2">
+        <div id="dlc1-a">DLC</div>
+        <div id="dlc1-b">10x point gain<br />10x cheaper small upgrades<br />small upgrade automation</div>
+        <div id="dlc1-c">cost: 1e15</div>
+      </button>
+      <button id="ng1" class="btn btn2">
+        <div id="ng1-a">NG+</div>
+        <div id="ng1-b">10x point gain<br />10x cheaper small upgrades<br />small upgrade automation</div>
+        <div id="ng1-c">cost: 1e15</div>
+      </button>
+      <button id="dlc2" class="btn btn2">
+        <div id="dlc2-a">DLC</div>
+        <div id="dlc2-b"></div>
+        <div id="dlc2-c"></div>
+      </button>
+      <button id="ng2" class="btn">
+        <div id="ng2-a">NG++</div>
+        <div id="ng2-b"></div>
+        <div id="ng2-c"></div>
+      </button>
+      <button id="dlc3" class="btn">
+        <div id="dlc3-a">DLC</div>
+        <div id="dlc3-b"></div>
+        <div id="dlc3-c"></div>
+      </button>
+      <button id="ng3" class="btn">
+        <div id="ng3-a">NG+++</div>
+        <div id="ng3-b"></div>
+        <div id="ng3-c"></div>
+      </button>
+      <button id="dlc4" class="btn">
+        <div id="dlc4-a">DLC</div>
+        <div id="dlc4-b"></div>
+        <div id="dlc4-c"></div>
+      </button>
+    </div>
+    <div id="automation2">automation</div>
+    <div id="automation">
+      <style>
+        #automation2 {
+          background-color: #fff4;
+          padding: 10px;
+          width: max-content;
+          font-size: 1.3em;
+        }
+        #automation {
+          background-color: #fff4;
+          width: 435px;
+          padding: 10px;
+
+          display: flex;
+          flex-wrap: wrap;
+          gap: 5px;
+        }
+
+        .au {
+          position: relative;
+          background-color: #dda2;
+          color: #000a;
+          height: 55px;
+          width: 100px;
+          text-align: center;
+          border: 0;
+        }
+        .au2 {
+          width: 135px;
+        }
+
+        .au :nth-child(1) {
+          font-size: 1.15em;
+          position: absolute;
+          display: flex;
+          top: 10px;
+          left: 50%;
+          white-space: nowrap;
+          transform: translate(-50%, -50%);
+        }
+        .au :nth-child(3) {
+          position: absolute;
+          display: flex;
+          bottom: -5px;
+          left: 50%;
+          white-space: nowrap;
+          transform: translate(-50%, -50%);
+          font-size: 0.85em;
+          color: #554560;
+        }
+
+        .au.on {
+          color: #000;
+          background-color: #ffd4;
+        }
+        .au[id^="dlc"] {
+          display: none;
+        }
+      </style>
+      <button id="su-auto" class="au">small upgrade</button>
+      <button id="bu-auto" class="au">big upgrade</button>
+      <button id="sp-auto" class="au">small prestige</button>
+      <button id="bp-auto" class="au">big prestige</button>
+      <button id="ng1-auto" class="au au2">NG+</button>
+      <button id="ng2-auto" class="au au2">NG++</button>
+      <button id="ng3-auto" class="au au2">NG+++</button>
+      <!-- these are here just so the game doesnt shit itself   maybe use them later-->
+      <button id="dlc1-auto" class="au">DLC</button>
+      <button id="dlc2-auto" class="au">DLC</button>
+      <button id="dlc3-auto" class="au">DLC</button>
+      <button id="dlc4-auto" class="au">DLC</button>
+    </div>
+  </body>
+  <div style="padding: 10px; color: #fffa; cursor: pointer; width: max-content; text-align: center" onclick="this.remove()">made in about 10 hours<br />⚠️there is no saving ⚠️<br />about an hour of playtime<br />hope you enjoy the game!<br />(click to hide)</div>
+</html>
