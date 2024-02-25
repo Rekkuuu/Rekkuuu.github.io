@@ -335,7 +335,7 @@ const init = () => {
   c("x").addEventListener("click", hide);
 
   c("save").addEventListener("click", save);
-  c("load").addEventListener("click", () => load());
+  c("load").addEventListener("click", () => load(undefined, true));
   c("export").addEventListener("click", exportSave);
   c("import").addEventListener("click", importSave);
 

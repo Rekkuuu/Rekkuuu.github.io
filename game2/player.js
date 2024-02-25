@@ -43,9 +43,11 @@ let saveLocation = "gamegame";
 const save = () => {
   localStorage.setItem(saveLocation, JSON.stringify(p));
   lastSave = Date.now();
+  $("save").innerText = "saved";
+  setTimeout(() => ($("save").innerText = "save"), 2000);
 };
 
-const load = (saveStr = localStorage.getItem(saveLocation)) => {
+const load = (saveStr = localStorage.getItem(saveLocation), change = false) => {
   lastSave = Date.now() - 1001;
   let pe = newPlayer();
 
@@ -89,8 +91,11 @@ const load = (saveStr = localStorage.getItem(saveLocation)) => {
     pe.autosave = s["autosave"] ?? pe["autosave"];
 
     p = pe;
+    if (change) {
+      $("load").innerText = "loaded";
+      setTimeout(() => ($("load").innerText = "load"), 2000);
+    }
   }
-  console.log(123);
   Object.keys(text).forEach((what) => {
     update(what);
   });
@@ -133,8 +138,7 @@ const importSave = () => {
     return;
   } catch (e) {
     if (oldSave) {
-      console.log(e);
-      console.log("loading save failed, last save: ");
+      console.log("loading save failed, loading last save", e);
       localStorage.setItem(saveLocation, oldSave);
       load();
       // location.reload();
