@@ -39,6 +39,7 @@ const newPlayer = () => {
 let p = newPlayer();
 let lastSave = Date.now();
 let saveLocation = "gamegame";
+let oldSave = "";
 let canUseLS = true;
 try {
   localStorage.getItem(saveLocation);
@@ -49,6 +50,7 @@ try {
 }
 
 const save = () => {
+  oldSave = JSON.stringify(p);
   if (!canUseLS) return;
   localStorage.setItem(saveLocation, JSON.stringify(p));
   lastSave = Date.now();
@@ -136,8 +138,6 @@ const exportSave = () => {
   }
 };
 const importSave = () => {
-  let oldSave = localStorage.getItem(saveLocation);
-
   let saveStr = prompt("paste your save string\nMAKE SURE ITS CORRECT\nloading a save will overwrite current save");
   if (saveStr == null) return;
   try {
