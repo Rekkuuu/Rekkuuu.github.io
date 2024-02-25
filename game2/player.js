@@ -141,7 +141,6 @@ const importSave = () => {
   if (saveStr == null) return;
   try {
     load(saveStr);
-    console.log(saveStr);
     $("import").innerText = "imported";
     if (!canUseLS) return;
     localStorage.setItem(saveLocation, saveStr);
