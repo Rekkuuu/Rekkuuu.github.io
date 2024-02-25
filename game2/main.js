@@ -242,7 +242,7 @@ const gameLoop = () => {
   }
 
   c("points").innerHTML = `points: ${format(p.points)}\
-${ps > 0 ? ` <span class="lightgreen">${ps == Infinity ? "You win!" : format(ps)}</span>` : ""}`;
+${ps > 0 || p.points == Infinity ? ` <span class="lightgreen">${ps == Infinity ? "You win!" : format(ps)}</span>` : ""}`;
 
   let canShow = p.dlc4 > 0;
   canShow |= p.ng3 > 0;
