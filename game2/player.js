@@ -39,15 +39,25 @@ const newPlayer = () => {
 let p = newPlayer();
 let lastSave = Date.now();
 let saveLocation = "gamegame";
+let canUseLS = true;
+try {
+  localStorage.getItem(saveLocation);
+} catch (error) {
+  canUseLS = false;
+
+  alert("saving/loading won't work unless you enable third party cookies");
+}
 
 const save = () => {
+  if (!canUseLS) return;
   localStorage.setItem(saveLocation, JSON.stringify(p));
   lastSave = Date.now();
   $("save").innerText = "saved";
   setTimeout(() => ($("save").innerText = "save"), 2000);
 };
 
-const load = (saveStr = localStorage.getItem(saveLocation), change = false) => {
+const load = (saveStr = canUseLS && localStorage.getItem(saveLocation), change = false) => {
+  if (!canUseLS) return;
   lastSave = Date.now() - 1001;
   let pe = newPlayer();
 
