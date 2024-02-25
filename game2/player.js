@@ -59,7 +59,6 @@ const save = () => {
 };
 
 const load = (saveStr = canUseLS && localStorage.getItem(saveLocation), change = false) => {
-  if (!canUseLS) return;
   lastSave = Date.now() - 1001;
   let pe = newPlayer();
 
