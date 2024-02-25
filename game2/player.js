@@ -141,17 +141,18 @@ const importSave = () => {
   let saveStr = prompt("paste your save string\nMAKE SURE ITS CORRECT\nloading a save will overwrite current save");
   if (saveStr == null) return;
   try {
-    localStorage.setItem(saveLocation, saveStr);
-    load();
+    load(saveStr);
     $("import").innerText = "imported";
+    if (!canUseLS) return;
+    localStorage.setItem(saveLocation, saveStr);
     setTimeout(() => ($("import").innerText = "import"), 2000);
     return;
   } catch (e) {
     if (oldSave) {
       console.log("loading save failed, loading last save", e);
+      load(oldSave);
+      if (!canUseLS) return;
       localStorage.setItem(saveLocation, oldSave);
-      load();
-      // location.reload();
     }
     return window.alert("loading save failed");
   }
