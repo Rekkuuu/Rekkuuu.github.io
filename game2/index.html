@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>game game</title>
     <script defer src="helper.js"></script>
+    <script defer src="player.js"></script>
     <script defer src="main.js"></script>
   </head>
   <body>
@@ -223,5 +224,122 @@
       <button id="dlc4-auto" class="au">DLC</button>
     </div>
   </body>
-  <div style="padding: 10px; color: #fffa; cursor: pointer; width: max-content; text-align: center" onclick="this.remove()">made in about 10 hours<br />⚠️there is no saving ⚠️<br />about an hour of playtime<br />hope you enjoy the game!<br />(click to hide)</div>
+
+  <style>
+    #settings-button {
+      position: fixed;
+      left: 7px;
+      bottom: 10px;
+      font-size: 20px;
+      height: 20px;
+      width: 20px;
+      line-height: 20px;
+      cursor: pointer;
+    }
+    #saving {
+      line-height: 20px;
+      font-size: 15px;
+      color: white;
+      position: fixed;
+      left: 43px;
+      bottom: 10px;
+      padding: 3px;
+      margin-left: -1px;
+      margin-bottom: -2px;
+      cursor: pointer;
+    }
+    #settings-button:hover {
+      filter: brightness(1.2);
+      transform: scale(1.2);
+    }
+    #settings-modal,
+    #settings-wrapper {
+      position: fixed;
+      background-color: #000a;
+      width: 100vw;
+      height: 100vh;
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      top: 0;
+      bottom: 0;
+      margin-top: auto;
+      margin-bottom: auto;
+      z-index: 10;
+      /* 99% sure all this can be done in some easier way */
+    }
+
+    :root {
+      --settings-w: 30vw;
+      --settings-h: 30vh;
+    }
+    #settings-wrapper {
+      position: fixed;
+      width: var(--settings-w);
+      height: var(--settings-h);
+      background-color: #666;
+      z-index: 11;
+    }
+
+    /* prettier-ignore */
+    #save{grid-area:save}
+    /* prettier-ignore */
+    #load{grid-area:load}
+    /* prettier-ignore */
+    #export{grid-area:export}
+    /* prettier-ignore */
+    #import{grid-area:import}
+    /* prettier-ignore */
+    #autosave{grid-area:autosave}
+
+    #info-2 {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+    }
+
+    #settings {
+      width: var(--settings-w);
+      height: var(--settings-h);
+      position: relative;
+      padding: 15px;
+      display: grid;
+      grid-template-areas: "save load ." "export import ." "autosave autosave ." "info info .";
+      grid-template-rows: auto auto 1fr;
+      grid-template-columns: auto auto 1fr;
+      gap: 10px;
+    }
+    #x {
+      position: absolute;
+      right: 10px;
+      font-size: 2em;
+      cursor: pointer;
+    }
+    #settings button {
+      background-color: #777;
+      border: 8px;
+      width: 100px;
+      height: 30px;
+    }
+    #settings button:hover {
+      background-color: #555;
+    }
+  </style>
+  <div id="settings-button">⚙️</div>
+  <div id="settings-modal">
+    <div id="settings-wrapper">
+      <div id="settings">
+        <button id="save">save</button>
+        <button id="load">load</button>
+        <button id="export">export</button>
+        <button id="import">import</button>
+        <div id="autosave"><input type="checkbox" id="autosave-check" /> autosaves</div>
+        <div id="x"><b>&times;</b></div>
+        <div id="info-2">made in about 10 hours<br />about an hour of playtime<br />hope you enjoy the game!</div>
+      </div>
+    </div>
+  </div>
+  <div style="display: none"><textarea id="saveExport"></textarea></div>
+  <div id="saving"></div>
 </html>

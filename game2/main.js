@@ -1,38 +1,3 @@
-let p = {
-  points: 1,
-  su: 0,
-  bu: 0,
-  sp: 0,
-  bp: 0,
-
-  ng1: 0,
-  ng2: 0,
-  ng3: 0,
-
-  dlc1: false,
-  dlc2: false,
-  dlc3: false,
-  dlc4: false,
-
-  auto: {
-    su: false,
-    bu: false,
-    sp: false,
-    bp: false,
-
-    ng1: false,
-    ng2: false,
-    ng3: false,
-
-    dlc1: false,
-    dlc2: false,
-    dlc3: false,
-    dlc4: false,
-  },
-
-  lastUpdate: Date.now(),
-};
-
 let order = ["su", "bu", "sp", "bp", "dlc1", "ng1", "dlc2", "ng2", "dlc3", "ng3", "dlc4"]; // make something else reset dlcs?
 
 const gn = (x) => {
@@ -215,7 +180,12 @@ const format = (x) => {
   }
 };
 
-let gameLoop = () => {
+const fn = (x) => {
+  if (x < 10) return x.toFixed(2);
+  else return x.toFixed(1);
+};
+
+const gameLoop = () => {
   let now = Date.now();
   let diff = (now - p.lastUpdate) / 1000;
 
@@ -224,6 +194,16 @@ let gameLoop = () => {
   // ps *= p.dlc4 ? 1.01 ** (p.su + p.bu + p.sp + p.bp + p.ng1 + p.ng2 + p.ng3 + p.dlc1 + p.dlc2 + p.dlc3 + p.dlc4) : 1;
 
   // ps*=
+
+  if (show(c("saving"), p.autosave)) {
+    let last = (Date.now() - lastSave) / 1000;
+
+    if (15 - last < 0) {
+      save();
+      last = (Date.now() - lastSave) / 1000;
+    }
+    c("saving").innerHTML = last > 1 ? `saving in ${fn(clamp(0, 15 - last, 15))}s` : "saved!";
+  }
 
   {
     let old = ps + 0;
@@ -262,7 +242,7 @@ let gameLoop = () => {
   }
 
   c("points").innerHTML = `points: ${format(p.points)}\
-${ps > 0 ? ` <span class="lightgreen">${p.points == Infinity || ps == Infinity ? "You win!" : format(ps)}</span>` : ""}`;
+${ps > 0 ? ` <span class="lightgreen">${ps == Infinity ? "You win!" : format(ps)}</span>` : ""}`;
 
   let canShow = p.dlc4 > 0;
   canShow |= p.ng3 > 0;
@@ -332,8 +312,38 @@ const update = (what) => {
 };
 
 const init = () => {
+  load();
+
   $("info").addEventListener("click", (e) => e.target.remove());
   $("info").addEventListener("keydown", (e) => e.which == 13 && e.target.remove());
+  c("saving").addEventListener("click", (e) => (lastSave -= 15000));
+
+  let show = () => {
+    c("settings-modal").style.display = "";
+    c("settings").style.display = "";
+  };
+  let hide = () => {
+    c("settings-modal").style.display = "none";
+    c("settings").style.display = "none";
+  };
+
+  hide();
+  c("settings-button").addEventListener("click", show);
+  c("settings-modal").addEventListener("click", (e) => {
+    if (e.target.id == "settings-modal") hide();
+  });
+  c("x").addEventListener("click", hide);
+
+  c("save").addEventListener("click", save);
+  c("load").addEventListener("click", () => load());
+  c("export").addEventListener("click", exportSave);
+  c("import").addEventListener("click", importSave);
+
+  c("autosave-check").checked = p.autosave;
+  c("autosave-check").addEventListener("click", () => {
+    p.autosave = !p.autosave;
+    c("autosave-check").checked = p.autosave;
+  });
 
   Object.keys(text).forEach((what) => {
     update(what);
